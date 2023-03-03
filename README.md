@@ -19,13 +19,22 @@ This project aims to develop a Telegram bot that incorporates OpenAI’s APIs. T
 
 ## Getting Started
 
-To install this project, simply clone the repository and run `go get`.
+To install this project, simply clone the repository.
 
 Create a bot token by going to the [Telegram web interface](https://core.telegram.org/bots#botfather).
 
 Then, create a openAI API token by going to the [OpenAI web interface](https://platform.openai.com/).
 
-Finally, start the bot with the `go run main.go` command.
+Set the environment paras TELEGRAM_TOKEN & OPENAI_TOKEN value from above tokens.
+
+Finally, start the bot with environment paras TELEGRAM_TOKEN & OPENAI_TOKEN.
+
+## Docker
+This project has a docker-compose.yml file, which will start the mkdocs application on your local machine and help you see changes instantly.
+Set the environment paras TELEGRAM_TOKEN & OPENAI_TOKEN value and just run by docker compose. 
+```
+docker compose up
+```
 
 ## Contributing
 
