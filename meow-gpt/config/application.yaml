@@ -1,0 +1,4 @@
+telegram:
+  token: Your_Telegram_Bot_Token
+openAI:
+  token: Your_OpenAI_Token
