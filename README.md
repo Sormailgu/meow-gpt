@@ -31,6 +31,10 @@ Finally, start the bot with environment paras TELEGRAM_TOKEN & OPENAI_TOKEN.
 
 ## Docker
 This project has a docker-compose.yml file, which will start the mkdocs application on your local machine and help you see changes instantly.
+Set the environment paras TELEGRAM_TOKEN & OPENAI_TOKEN value and just run by docker compose. 
+```
+docker compose up
+```
 
 ## Contributing
 
