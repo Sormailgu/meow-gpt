@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  meowgpt:
+    image: sormailgu/meow-gpt:1.0.0
+    environment:
+      - TELEGRAM_TOKEN=Your Telegram Bot Token
+      - OPENAI_TOKEN=Your OpenAI API Token
+    networks:
+      - meowgpt-network
+
+networks:
+  meowgpt-network:
+    driver: bridge
