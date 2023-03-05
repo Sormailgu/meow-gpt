@@ -2,13 +2,14 @@ package main
 
 import (
 	"context"
-	gogpt "github.com/sashabaranov/go-gpt3"
+	"fmt"
+	"github.com/go-telegram/bot"
+	"github.com/go-telegram/bot/models"
+	"github.com/sashabaranov/go-openai"
 	"github.com/spf13/viper"
 	"os"
 	"os/signal"
-
-	"github.com/go-telegram/bot"
-	"github.com/go-telegram/bot/models"
+	"strings"
 )
 
 func main() {
@@ -21,8 +22,7 @@ func main() {
 		bot.WithDefaultHandler(handler),
 	}
 
-	//tgToken := viper.GetString("telegram.token")
-	tgToken := os.Getenv("TELEGRAM_TOKEN")
+	tgToken := viper.GetString("TELEGRAM_BOT_TOKEN")
 	b, err := bot.New(tgToken, opts...)
 	if err != nil {
 		panic(err)
@@ -32,23 +32,37 @@ func main() {
 }
 
 func handler(ctx context.Context, b *bot.Bot, update *models.Update) {
-	//gptToken := viper.GetString("openAI.token")
-	gptToken := os.Getenv("OPENAI_TOKEN")
-	gptClient := gogpt.NewClient(gptToken)
-	req := gogpt.CompletionRequest{
-		Model:     gogpt.GPT3TextDavinci003,
-		MaxTokens: 1024,
-		Prompt:    update.Message.Text,
-		//Temperature: 0,
-		//TopP:        0,
-	}
-	resp, err := gptClient.CreateCompletion(ctx, req)
+	var gptToken = viper.GetString("OPENAI_API_KEY")
+	var gptModel = viper.GetString("OPENAI_MODEL")
+	var gptTemperature = float32(viper.GetFloat64("OPENAI_TEMPERATURE"))
+	var gptMaxTokens = viper.GetInt("OPENAI_MAX_TOKENS")
+	var gptTopP = float32(viper.GetFloat64("OPENAI_TOP_P"))
+	var gptFrequencyPenalty = float32(viper.GetFloat64("OPENAI_FREQUENCY_PENALTY"))
+	var gptPresencePenalty = float32(viper.GetFloat64("OPENAI_PRESENCE_PENALTY"))
 
+	client := openai.NewClient(gptToken)
+	resp, err := client.CreateChatCompletion(
+		context.Background(),
+		openai.ChatCompletionRequest{
+			Model:            gptModel,
+			MaxTokens:        gptMaxTokens,
+			Temperature:      gptTemperature,
+			FrequencyPenalty: gptFrequencyPenalty,
+			PresencePenalty:  gptPresencePenalty,
+			TopP:             gptTopP,
+			Messages: []openai.ChatCompletionMessage{
+				{
+					Role:    openai.ChatMessageRoleUser,
+					Content: update.Message.Text,
+				},
+			},
+		},
+	)
 	var respTxt = update.Message.Text
 	if err != nil {
-		respTxt = "GPT return error! " + err.Error()
+		respTxt = "GPT return error! Error message:\n" + err.Error()
 	} else {
-		respTxt = resp.Choices[0].Text
+		respTxt = resp.Choices[0].Message.Content
 	}
 
 	b.SendMessage(ctx, &bot.SendMessageParams{
@@ -66,4 +80,9 @@ func InitConfig() {
 	if err != nil {
 		panic("init error")
 	}
+
+	viper.AutomaticEnv()
+	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
+
+	fmt.Printf("%+v\n", viper.AllSettings())
 }

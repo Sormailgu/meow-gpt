@@ -11,9 +11,14 @@ WORKDIR /go/app
 COPY . /go/app
 
 # Environment variables
-ENV OPENAI_TOKEN=''
-
-ENV TELEGRAM_TOKEN=''
+ENV TELEGRAM_BOT_TOKEN=''
+ENV OPENAI_API_KEY=''
+ENV OPENAI_MODEL='gpt-3.5-turbo'
+ENV OPENAI_TEMPERATURE=1
+ENV OPENAI_MAX_TOKENS=2048
+ENV OPENAI_TOP_P=1
+ENV OPENAI_FREQUENCY_PENALTY=0
+ENV OPENAI_PRESENCE_PENALTY=0
 
 # Used as a proxy to download the packages that the go project depends on
 #ENV GOPROXY https://goproxy.cn,direct

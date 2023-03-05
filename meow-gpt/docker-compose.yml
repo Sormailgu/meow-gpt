@@ -2,10 +2,16 @@ version: '3'
 
 services:
   meowgpt:
-    image: sormailgu/meow-gpt:1.0.0
+    image: sormailgu/meow-gpt:1.1.0
     environment:
-      - TELEGRAM_TOKEN=Your Telegram Bot Token
-      - OPENAI_TOKEN=Your OpenAI API Token
+      - TELEGRAM_BOT_TOKEN=Your Telegram Bot Token
+      - OPENAI_API_KEY=Your OpenAI API Token
+      - OPENAI_MODEL=gpt-3.5-turbo
+      - OPENAI_TEMPERATURE=1
+      - OPENAI_MAX_TOKENS=1024
+      - OPENAI_TOP_P=1
+      - OPENAI_FREQUENCY_PENALTY=0
+      - OPENAI_PRESENCE_PENALTY=0
     networks:
       - meowgpt-network
 
