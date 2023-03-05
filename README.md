@@ -3,11 +3,7 @@ This project aims to develop a Telegram bot that incorporates OpenAI’s APIs. T
 
 ## Features
 
-* Easy integration with OpenAI APIs to enrich the user experience.
-
-* Ability for users to perform natural language processing (NLP) tasks, such as sentiment analysis and automated text summarization without the need for coding knowledge.
-
-* Natural language understanding (NLU) capabilities for enhanced interaction.
+* Easy integration with OpenAI APIs to enrich the Telegram Bot user experience.
 
 * Automation of tasks specific to the needs of a particular organization by creating custom bots.
 
@@ -25,13 +21,16 @@ Create a bot token by going to the [Telegram web interface](https://core.telegra
 
 Then, create a openAI API token by going to the [OpenAI web interface](https://platform.openai.com/).
 
-Set the environment paras TELEGRAM_TOKEN & OPENAI_TOKEN value from above tokens.
+Set the config file (/config/application.yml) paras TELEGRAM_BOT_TOKEN & OPENAI_API_KEY value from above tokens.
 
-Finally, start the bot with environment paras TELEGRAM_TOKEN & OPENAI_TOKEN.
+Finally, start the bot.
+```
+go run main.go
+```
 
 ## Docker
 This project has a docker-compose.yml file, which will start the mkdocs application on your local machine and help you see changes instantly.
-Set the environment paras TELEGRAM_TOKEN & OPENAI_TOKEN value and just run by docker compose. 
+Set the environment paras TELEGRAM_BOT_TOKEN & OPENAI_API_KEY value and just run by docker compose. 
 ```
 docker compose up
 ```
