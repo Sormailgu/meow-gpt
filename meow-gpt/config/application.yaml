@@ -1,4 +1,8 @@
-#telegram:
-#  token: Your_Telegram_Bot_Token
-#openAI:
-#  token: Your_OpenAI_Token
+TELEGRAM_BOT_TOKEN: 'Your Telegram Bot token'
+OPENAI_API_KEY: 'Your OpenAI API token'
+OPENAI_MODEL: 'gpt-3.5-turbo'
+OPENAI_FREQUENCY_PENALTY: 0
+OPENAI_MAX_TOKENS: 2048
+OPENAI_PRESENCE_PENALTY: 0
+OPENAI_TEMPERATURE: 0
+OPENAI_TOP_P: 1
