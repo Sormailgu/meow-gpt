@@ -1,4 +1,4 @@
-# Telega Bot - Integrating OpenAI APIs in Golang
+# Telegram Bot - Integrating OpenAI ChatGPT APIs in Golang
 This project aims to develop a Telegram bot that incorporates OpenAI’s APIs. The goal of this project is to automate tasks and increase human-bot interaction in a natural and intuitive way.
 
 ## Features
